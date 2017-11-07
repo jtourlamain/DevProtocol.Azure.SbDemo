@@ -6,7 +6,7 @@ A dotnet core solution written in F# to push and receive messages via an Azure S
 
 ## Contributors
 
-- [Jan Tourlamain] (https://github.com/jtourlamain "Jan Tourlamain GitHub")
+- [Jan Tourlamain](https://github.com/jtourlamain "Jan Tourlamain GitHub")
 
 ## License
 
