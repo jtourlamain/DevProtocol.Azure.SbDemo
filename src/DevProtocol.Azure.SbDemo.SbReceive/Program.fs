@@ -1,8 +1,11 @@
 ﻿// Learn more about F# at http://fsharp.org
 
 open System
+open DevProtocol.Azure.SbDemo.SbReceive
 
 [<EntryPoint>]
 let main argv =
-    printfn "Hello World from F#!"
-    0 // return an integer exit code
+    printfn "Start receiving messages"
+    Sb.receiveData()
+    Console.ReadLine() |> ignore
+    0
