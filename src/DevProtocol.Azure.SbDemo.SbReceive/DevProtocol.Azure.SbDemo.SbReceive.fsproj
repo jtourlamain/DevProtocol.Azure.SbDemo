@@ -11,7 +11,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="FSharp.Control.FusionTasks.FS41" Version="1.1.0" />
     <PackageReference Include="Microsoft.Azure.ServiceBus" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Update="FSharp.Core" Version="4.2.3" />
   </ItemGroup>
 
 </Project>

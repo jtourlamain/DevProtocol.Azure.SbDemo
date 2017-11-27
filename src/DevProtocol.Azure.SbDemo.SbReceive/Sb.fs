@@ -10,16 +10,18 @@ module Sb =
     let connectionstring = "<your connectionstring>"
     let queuePath = "<your queuename>"
 
-    let receiveData() = 
-        let queueClient = QueueClient(connectionstring, queuePath) 
+    let receiveData() =
+        let queueClient = QueueClient(connectionstring, queuePath)
+
         let exceptionReceivedHandler (args:ExceptionReceivedEventArgs) =
             printfn "Got an exception: %A" args.Exception
             Task.CompletedTask
-        let processMessage (message:Message) (token:CancellationToken) =
-                printfn "Received message: %s" (Encoding.UTF8.GetString(message.Body))
-                queueClient.CompleteAsync(message.SystemProperties.LockToken)|> Async.AwaitTask |> ignore
-                Task.CompletedTask
+
+        let processMessageAsync (message:Message) (token:CancellationToken) =
+            printfn "Received message: %s" (Encoding.UTF8.GetString(message.Body))
+            queueClient.CompleteAsync(message.SystemProperties.LockToken)
+
         let msgOptions = new MessageHandlerOptions(fun x -> exceptionReceivedHandler(x))
         msgOptions.AutoComplete <- false
-        let messagehandler = queueClient.RegisterMessageHandler(processMessage, msgOptions)
+        let messagehandler = queueClient.RegisterMessageHandler(processMessageAsync, msgOptions)
         messagehandler |> ignore
