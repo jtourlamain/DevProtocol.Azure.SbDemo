@@ -8,27 +8,26 @@ module Sb =
     let queuePath = "<your queuename>"
 
     let sendData data =
-        let queueClient = QueueClient(connectionstring, queuePath)    
+        let queueClient = QueueClient(connectionstring, queuePath)
         let sendMessage (queueClient:IQueueClient) (messageText:string) =
             async {
                 printfn "%s" messageText
                 let message = Message(Encoding.UTF8.GetBytes messageText)
-                let! result = queueClient.SendAsync(message) |> Async.AwaitTask
+                let! result = queueClient.SendAsync(message)
                 return result
-            }            
+             }
         async {
-            let result =  List.iter(fun x -> sendMessage queueClient x |> Async.RunSynchronously) data
-            queueClient.CloseAsync() |> Async.AwaitTask
-            |> ignore
+            let tasks = List.map(fun x -> sendMessage queueClient x) data
+            let! result = Async.Parallel tasks
+            do! queueClient.CloseAsync()
             return result
         }
 
     let sendTestMessage (messageText:string) =
-        let queueClient = QueueClient(connectionstring, queuePath)    
+        let queueClient = QueueClient(connectionstring, queuePath)
         async {
             printfn "%s" messageText
             let message = Message(Encoding.UTF8.GetBytes messageText)
-            let! result = queueClient.SendAsync(message) |> Async.AwaitTask
+            let! result = queueClient.SendAsync(message)
             return result
         }
-       
