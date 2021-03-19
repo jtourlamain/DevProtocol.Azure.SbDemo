@@ -10,7 +10,7 @@ A dotnet core solution written in F# to push and receive messages via an Azure S
 
 ## More info
 
-[https://www.devprotocol.com/tutorial-azure-service-bus-dotnet-core-and-fsharp/](https://www.devprotocol.com/tutorial-azure-service-bus-dotnet-core-and-fsharp/)
+[https://www.devprotocol.com/2017/11/12/tutorial-azure-service-bus-dotnet-core-and-fsharp.html](https://www.devprotocol.com/2017/11/12/tutorial-azure-service-bus-dotnet-core-and-fsharp.html)
 
 ## License
 
